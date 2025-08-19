@@ -19,7 +19,9 @@
       color: #333;
     }
 
-    /* ---------------- Header ---------------- */
+    /* ==========================
+       Header with layered blueprint
+    ========================== */
     header {
       background: linear-gradient(135deg, #41424C 0%, #595960 100%);
       color: white;
@@ -29,42 +31,42 @@
       overflow: hidden;
     }
 
-    /* Animated blueprint grid */
-    header::before {
+    /* Layered moving blueprint lines */
+    header::before,
+    header::after {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 200%;
-      height: 200%;
-      background-image: 
-        linear-gradient(45deg, rgba(255,255,255,0.05) 1px, transparent 1px),
-        linear-gradient(-45deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      height: 100%;
+      z-index: 0;
       background-size: 50px 50px;
-      z-index: 0;
-      animation: moveLines 30s linear infinite;
+      opacity: 0.1;
     }
 
-    @keyframes moveLines {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-50px, 50px); }
+    header::before {
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(-45deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      animation: moveLines1 10s linear infinite;
     }
 
-    /* Decorative civil engineering icons with pulse */
     header::after {
-      content: "⚙️ 🌉";
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 2rem;
-      opacity: 0.15;
-      z-index: 0;
-      animation: pulseIcons 2s ease-in-out infinite alternate;
+      background-image:
+        linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      animation: moveLines2 15s linear infinite;
     }
 
-    @keyframes pulseIcons {
-      0% { transform: scale(1); opacity: 0.15; }
-      100% { transform: scale(1.1); opacity: 0.25; }
+    @keyframes moveLines1 {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+    @keyframes moveLines2 {
+      0% { transform: translateX(0) translateY(-50%); }
+      100% { transform: translateX(0) translateY(0); }
     }
 
     header * {
@@ -94,7 +96,9 @@
       font-size: 1.1rem;
     }
 
-    /* ---------------- Main Content ---------------- */
+    /* ==========================
+       Main content
+    ========================== */
     main {
       max-width: 900px;
       margin: auto;
@@ -107,11 +111,6 @@
       padding: 1.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    h2 {
-      color: var(--grey);
-      margin-top: 0;
     }
 
     a {
@@ -231,10 +230,11 @@
       <div class="slideshow-container">
         <img src="BridgeInspection01" alt="Bridge Inspection" class="active-slide">
         <img src="BridgeInspection02" alt="Snooper Truck Bridge Inspection">
-        <img src="roadconstruction" alt="Road Construction">
-        <img src="CantonProject" alt="Municipal Project">
-        <img src="I90" alt="Interstate Bridge Preservation">
-        <img src="I90_02" alt="Interstate Bridge Preservation">
+        <img src="roadconstruction.jpg" alt="Road Construction">
+        <img src="CantonProject.jpg" alt="Municipal Project">
+        <img src="I90.jpg" alt="Interstate Bridge Preservation">
+        <img src="I90_02.jpg" alt="Interstate Bridge Preservation">
+
         <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
         <a class="next" onclick="changeSlide(1)">&#10095;</a>
       </div>
@@ -243,7 +243,7 @@
     <section class="card">
       <h2>Download My Resume</h2>
       <p>Interested in a more detailed overview of my experience, skills, and accomplishments?</p>
-      <a class="btn" href="UptonResume.pdf.pdf" target="_blank">📄 View My Resume</a>
+      <a class="btn" href="UptonResume.pdf" target="_blank">📄 View My Resume</a>
     </section>
 
     <section class="card">
@@ -289,4 +289,3 @@
 
 </body>
 </html>
-
