@@ -10,7 +10,6 @@
       --grey: #41424C;
       --light: #f9f9f9;
       --accent: #0074D9;
-      --grid: rgba(0, 180, 255, 0.25); /* blueprint blue lines */
     }
 
     body {
@@ -20,85 +19,85 @@
       color: #333;
     }
 
-  /* ==========================
-   Header with layered blueprint
-========================== */
-header {
-  background: var(--grey);
-  color: white;
-  text-align: center;
-  padding: 3rem 1rem 2rem;
-  position: relative;
-  overflow: hidden;
-}
+    /* ==========================
+       Header with layered blueprint
+    ========================== */
+    header {
+      background: #2c2c2c;
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* Layered moving blueprint lines */
-header::before,
-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 300%;
-  height: 300%;
-  z-index: 0;
-  background-repeat: repeat;
-  pointer-events: none;
-}
+    header h1, header p {
+      position: relative;
+      z-index: 2;
+      margin: 0.2em 0;
+    }
 
-/* Diagonal lines layer */
-header::before {
-  background-image:
-    linear-gradient(45deg, var(--grid) 2px, transparent 2px),
-    linear-gradient(-45deg, var(--grid) 2px, transparent 2px);
-  background-size: 60px 60px;
-  animation: moveLines1 12s linear infinite;
-}
+    header h1 {
+      font-size: 2.5rem;
+    }
 
-/* Horizontal + vertical grid layer */
-header::after {
-  background-image:
-    linear-gradient(0deg, var(--grid) 2px, transparent 2px),
-    linear-gradient(90deg, var(--grid) 2px, transparent 2px);
-  background-size: 60px 60px;
-  animation: moveLines2 15s linear infinite;
-}
+    header p {
+      font-size: 1.1rem;
+    }
 
-@keyframes moveLines1 {
-  0% { transform: translateX(-20%) translateY(-20%); }
-  100% { transform: translateX(0) translateY(0); }
-}
+    /* Layered blueprint lines */
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      z-index: 1;
+      background-repeat: repeat;
+    }
 
-@keyframes moveLines2 {
-  0% { transform: translateX(0) translateY(-20%); }
-  100% { transform: translateX(-20%) translateY(0); }
-}
+    /* Diagonal lines layer */
+    header::before {
+      background-image:
+        linear-gradient(45deg, rgba(0, 180, 255, 0.2) 2px, transparent 2px),
+        linear-gradient(-45deg, rgba(0, 180, 255, 0.2) 2px, transparent 2px);
+      background-size: 40px 40px;
+      animation: moveLines1 30s linear infinite;
+    }
 
-header * {
-  position: relative;
-  z-index: 1;
-}
+    /* Horizontal + vertical lines layer */
+    header::after {
+      background-image:
+        linear-gradient(0deg, rgba(0, 180, 255, 0.15) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 180, 255, 0.15) 2px, transparent 2px);
+      background-size: 40px 40px;
+      animation: moveLines2 30s linear infinite;
+    }
+
+    @keyframes moveLines1 {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(0) translateY(0); }
+    }
+
+    @keyframes moveLines2 {
+      0% { transform: translateX(0) translateY(-50%); }
+      100% { transform: translateX(0) translateY(0); }
+    }
 
     .logo {
       width: 200px;
-      border-radius: 50%; /* circular logo */
+      border-radius: 50%;
       margin-bottom: 1rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s;
+      position: relative;
+      z-index: 2;
     }
 
     .logo:hover {
       transform: scale(1.05);
-    }
-
-    h1 {
-      margin: 0.2em 0;
-      font-size: 2.5rem;
-    }
-
-    p {
-      margin: 0.2em 0 0;
-      font-size: 1.1rem;
     }
 
     /* ==========================
@@ -150,14 +149,15 @@ header * {
       margin: auto;
     }
 
-    .slideshow-container img {
-      width: 100%;
-      border-radius: 10px;
+    .mySlides {
       display: none;
+      text-align: center;
     }
 
-    .active-slide {
-      display: block;
+    .mySlides img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
 
     .prev, .next {
@@ -165,24 +165,21 @@ header * {
       position: absolute;
       top: 50%;
       width: auto;
-      padding: 0.5rem;
-      margin-top: -20px;
+      margin-top: -22px;
+      padding: 16px;
       color: white;
       font-weight: bold;
-      font-size: 1.5rem;
-      border-radius: 0 3px 3px 0;
+      font-size: 24px;
+      transition: 0.3s;
+      border-radius: 3px;
       user-select: none;
-      background-color: rgba(0,0,0,0.4);
-      transition: background 0.3s;
     }
 
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
+    .prev { left: 0; }
+    .next { right: 0; }
 
     .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.8);
+      background-color: rgba(0,0,0,0.6);
     }
 
     footer {
@@ -195,8 +192,10 @@ header * {
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <img src="logo.JPG" alt="Elijah Upton" class="logo" />
+    <div class="grid-overlay"></div>
+    <img src="logo.jpg" alt="Elijah Upton" class="logo" />
     <h1>Elijah Upton</h1>
     <p>Civil Engineering Student | South Dakota School of Mines and Technology</p>
   </header>
@@ -233,22 +232,34 @@ header * {
       <h2>Photo Gallery</h2>
       <p>Click through photos from projects and experiences:</p>
       <div class="slideshow-container">
-        <img src="BridgeInspection01.PNG" alt="Bridge Inspection" class="active-slide">
-        <img src="BridgeInspection02.JPG" alt="Snooper Truck Bridge Inspection">
-        <img src="roadconstruction.JPG" alt="Road Construction">
-        <img src="CantonProject.JPG" alt="Municipal Project">
-        <img src="I90.JPG" alt="Interstate Bridge Preservation">
-        <img src="I90_02.JPG" alt="Interstate Bridge Preservation">
+        <div class="mySlides">
+          <img src="BridgeInspection01.PNG" alt="Bridge Inspection 01">
+        </div>
+        <div class="mySlides">
+          <img src="BridgeInspection02.JPG" alt="Bridge Inspection 02">
+        </div>
+        <div class="mySlides">
+          <img src="roadconstruction.JPG" alt="Road Construction">
+        </div>
+        <div class="mySlides">
+          <img src="CantonProject.JPG" alt="Municipal Project">
+        </div>
+        <div class="mySlides">
+          <img src="I90.JPG" alt="Interstate Bridge Preservation">
+        </div>
+        <div class="mySlides">
+          <img src="I90_02.JPG" alt="Interstate Bridge Preservation">
+        </div>
 
-        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
     </section>
 
     <section class="card">
       <h2>Download My Resume</h2>
       <p>Interested in a more detailed overview of my experience, skills, and accomplishments?</p>
-      <a class="btn" href="UptonResume.pdf.pdf" target="_blank">📄 View My Resume</a>
+      <a class="btn" href="UptonResume.pdf" target="_blank">📄 View My Resume</a>
     </section>
 
     <section class="card">
@@ -263,9 +274,9 @@ header * {
 
     <section class="card">
       <h2>Contact</h2>
-      <p>📞 <strong>605-500-6391</strong></p>
-      <p>🔗 <a href="https://www.linkedin.com/in/elijah-upton" target="_blank">LinkedIn Profile</a></p>
-      <p>📸 <a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
+      <p><strong>605-500-6391</strong></p>
+      <p><a href="https://www.linkedin.com/in/elijah-upton" target="_blank">LinkedIn Profile</a></p>
+      <p><a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
     </section>
   </main>
 
@@ -274,24 +285,27 @@ header * {
   </footer>
 
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slideshow-container img');
+    let slideIndex = 0;
+    showSlides();
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active-slide');
-        if(i === index) slide.classList.add('active-slide');
-      });
+    function plusSlides(n) {
+      slideIndex += n - 1;
+      showSlides();
     }
 
-    function changeSlide(n) {
-      currentSlide += n;
-      if(currentSlide < 0) currentSlide = slides.length - 1;
-      if(currentSlide >= slides.length) currentSlide = 0;
-      showSlide(currentSlide);
+    function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) { slideIndex = 1 }
+      if (slideIndex < 1) { slideIndex = slides.length }
+      slides[slideIndex-1].style.display = "block";
+      setTimeout(showSlides, 5000); // Change every 5 seconds
     }
   </script>
 
 </body>
 </html>
-
