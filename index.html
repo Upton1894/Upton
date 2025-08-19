@@ -20,13 +20,13 @@
     }
 
     /* ==========================
-       Header with layered blueprint
+       Header with animated blueprint lines
     ========================== */
     header {
       background: #2c2c2c;
       color: white;
       text-align: center;
-      padding: 3rem 1rem 2rem;
+      padding: 4rem 1rem 2rem;
       position: relative;
       overflow: hidden;
     }
@@ -45,47 +45,6 @@
       font-size: 1.1rem;
     }
 
-    /* Layered blueprint lines */
-    header::before,
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      z-index: 1;
-      background-repeat: repeat;
-    }
-
-    /* Diagonal lines layer */
-    header::before {
-      background-image:
-        linear-gradient(45deg, rgba(0, 180, 255, 0.2) 2px, transparent 2px),
-        linear-gradient(-45deg, rgba(0, 180, 255, 0.2) 2px, transparent 2px);
-      background-size: 40px 40px;
-      animation: moveLines1 30s linear infinite;
-    }
-
-    /* Horizontal + vertical lines layer */
-    header::after {
-      background-image:
-        linear-gradient(0deg, rgba(0, 180, 255, 0.15) 2px, transparent 2px),
-        linear-gradient(90deg, rgba(0, 180, 255, 0.15) 2px, transparent 2px);
-      background-size: 40px 40px;
-      animation: moveLines2 30s linear infinite;
-    }
-
-    @keyframes moveLines1 {
-      0% { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(0) translateY(0); }
-    }
-
-    @keyframes moveLines2 {
-      0% { transform: translateX(0) translateY(-50%); }
-      100% { transform: translateX(0) translateY(0); }
-    }
-
     .logo {
       width: 200px;
       border-radius: 50%;
@@ -98,6 +57,28 @@
 
     .logo:hover {
       transform: scale(1.05);
+    }
+
+    /* Blueprint lines animation */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200%;
+      height: 200%;
+      background-image:
+        linear-gradient(0deg, rgba(0,180,255,0.2) 2px, transparent 0),
+        linear-gradient(90deg, rgba(0,180,255,0.2) 2px, transparent 0);
+      background-size: 40px 40px;
+      z-index: 1;
+      transform-origin: top right;
+      animation: moveLines 28s linear forwards;
+    }
+
+    @keyframes moveLines {
+      0% { transform: translate(50%, -50%); }
+      100% { transform: translate(0%, 0%); }
     }
 
     /* ==========================
@@ -115,6 +96,14 @@
       padding: 1.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h2 {
+      margin-top: 0;
+    }
+
+    .card ul {
+      padding-left: 1.2rem;
     }
 
     a {
@@ -142,7 +131,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Slideshow styles */
+    /* Slideshow */
     .slideshow-container {
       position: relative;
       max-width: 100%;
@@ -188,13 +177,24 @@
       color: #777;
       padding: 2rem 1rem;
     }
+
+    /* Icons in content */
+    .contact p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.2em 0;
+    }
+
+    .contact i {
+      color: var(--accent);
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
   <header>
-    <div class="grid-overlay"></div>
     <img src="logo.jpg" alt="Elijah Upton" class="logo" />
     <h1>Elijah Upton</h1>
     <p>Civil Engineering Student | South Dakota School of Mines and Technology</p>
@@ -232,25 +232,12 @@
       <h2>Photo Gallery</h2>
       <p>Click through photos from projects and experiences:</p>
       <div class="slideshow-container">
-        <div class="mySlides">
-          <img src="BridgeInspection01.PNG" alt="Bridge Inspection 01">
-        </div>
-        <div class="mySlides">
-          <img src="BridgeInspection02.JPG" alt="Bridge Inspection 02">
-        </div>
-        <div class="mySlides">
-          <img src="roadconstruction.JPG" alt="Road Construction">
-        </div>
-        <div class="mySlides">
-          <img src="CantonProject.JPG" alt="Municipal Project">
-        </div>
-        <div class="mySlides">
-          <img src="I90.JPG" alt="Interstate Bridge Preservation">
-        </div>
-        <div class="mySlides">
-          <img src="I90_02.JPG" alt="Interstate Bridge Preservation">
-        </div>
-
+        <div class="mySlides"><img src="BridgeInspection01.PNG" alt="Bridge Inspection 01"></div>
+        <div class="mySlides"><img src="BridgeInspection02.JPG" alt="Bridge Inspection 02"></div>
+        <div class="mySlides"><img src="roadconstruction.JPG" alt="Road Construction"></div>
+        <div class="mySlides"><img src="CantonProject.JPG" alt="Municipal Project"></div>
+        <div class="mySlides"><img src="I90.JPG" alt="Interstate Bridge Preservation"></div>
+        <div class="mySlides"><img src="I90_02.JPG" alt="Interstate Bridge Preservation"></div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
       </div>
@@ -259,7 +246,7 @@
     <section class="card">
       <h2>Download My Resume</h2>
       <p>Interested in a more detailed overview of my experience, skills, and accomplishments?</p>
-      <a class="btn" href="UptonResume.pdf" target="_blank">📄 View My Resume</a>
+      <p><i>📄</i> <a class="btn" href="UptonResume.pdf" target="_blank">View My Resume</a></p>
     </section>
 
     <section class="card">
@@ -272,11 +259,11 @@
       </ul>
     </section>
 
-    <section class="card">
+    <section class="card contact">
       <h2>Contact</h2>
-      <p><strong>605-500-6391</strong></p>
-      <p><a href="https://www.linkedin.com/in/elijah-upton" target="_blank">LinkedIn Profile</a></p>
-      <p><a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
+      <p><i>📞</i> <strong>605-500-6391</strong></p>
+      <p><i>🔗</i> <a href="https://www.linkedin.com/in/elijah-upton" target="_blank">LinkedIn Profile</a></p>
+      <p><i>📸</i> <a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
     </section>
   </main>
 
@@ -306,6 +293,5 @@
       setTimeout(showSlides, 5000); // Change every 5 seconds
     }
   </script>
-
 </body>
 </html>
