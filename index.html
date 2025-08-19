@@ -22,16 +22,40 @@
     header {
       background-color: var(--grey);
       color: white;
-      padding: 3rem 1rem 2rem;
       text-align: center;
+      padding: 3rem 1rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Blueprint grid design in header */
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+    }
+
+    header * {
+      position: relative;
+      z-index: 1;
     }
 
     .logo {
       width: 200px;
+      border-radius: 50%; /* circular logo */
       margin-bottom: 1rem;
       box-shadow: 0 8px 12px rgba(0,0,0,0.1);
       transition: transform 0.3s;
     }
+
     .logo:hover {
       transform: scale(1.05);
     }
@@ -139,7 +163,7 @@
 
   <header>
     <img src="logo.jpg" alt="Elijah Upton" class="logo" />
-    <h1></h1>
+    <h1>Elijah Upton</h1>
     <p>Civil Engineering Student | South Dakota School of Mines and Technology</p>
   </header>
 
@@ -174,7 +198,6 @@
     <section class="card">
       <h2>Photo Gallery</h2>
       <p>Click through photos from projects and experiences:</p>
-
       <div class="slideshow-container">
         <img src="BridgeInspection01.png" alt="Bridge Inspection" class="active-slide">
         <img src="BridgeInspection02.jpg" alt="Snooper Truck Bridge Inspection">
@@ -191,7 +214,7 @@
     <section class="card">
       <h2>Download My Resume</h2>
       <p>Interested in a more detailed overview of my experience, skills, and accomplishments?</p>
-      <a class="btn" href="UptonResume.pdf.pdf" target="_blank">📄 View My Resume</a>
+      <a class="btn" href="UptonResume.pdf" target="_blank">📄 View My Resume</a>
     </section>
 
     <section class="card">
@@ -208,7 +231,7 @@
       <h2>Contact</h2>
       <p>📞 <strong>605-500-6391</strong></p>
       <p>🔗 <a href="https://www.linkedin.com/in/elijah-upton" target="_blank">LinkedIn Profile</a></p>
-      <p> 🅾 <a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
+      <p>📸 <a href="https://www.instagram.com/elijah.upton/" target="_blank">Instagram Profile</a></p>
     </section>
   </main>
 
@@ -237,8 +260,3 @@
 
 </body>
 </html>
-
-
-
-
-
