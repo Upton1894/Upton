@@ -19,60 +19,64 @@
       color: #333;
     }
 
-    /* ==========================
-       Header with layered blueprint
-    ========================== */
-    header {
-      background: linear-gradient(135deg, #41424C 0%, #595960 100%);
-      color: white;
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
+  /* ==========================
+   Header with layered blueprint
+========================== */
+header {
+  background: #41424C;
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* Layered moving blueprint lines */
-    header::before,
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 100%;
-      z-index: 0;
-      background-size: 50px 50px;
-      opacity: 0.1;
-    }
+/* Layered moving blueprint lines */
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  z-index: 0;
+  background-repeat: repeat;
+}
 
-    header::before {
-      background-image:
-        linear-gradient(45deg, rgba(255,255,255,0.08) 1px, transparent 1px),
-        linear-gradient(-45deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-      animation: moveLines1 10s linear infinite;
-    }
+/* Diagonal lines layer */
+header::before {
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.25) 2px, transparent 2px),
+    linear-gradient(-45deg, rgba(255,255,255,0.25) 2px, transparent 2px);
+  background-size: 40px 40px;
+  animation: moveLines1 10s linear infinite;
+}
 
-    header::after {
-      background-image:
-        linear-gradient(0deg, rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      animation: moveLines2 15s linear infinite;
-    }
+/* Horizontal + vertical grid layer */
+header::after {
+  background-image:
+    linear-gradient(0deg, rgba(255,255,255,0.15) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255,255,255,0.15) 2px, transparent 2px);
+  background-size: 40px 40px;
+  animation: moveLines2 15s linear infinite;
+}
 
-    @keyframes moveLines1 {
-      0% { transform: translateX(-50%) translateY(0); }
-      100% { transform: translateX(0) translateY(0); }
-    }
+@keyframes moveLines1 {
+  0% { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(0) translateY(0); }
+}
 
-    @keyframes moveLines2 {
-      0% { transform: translateX(0) translateY(-50%); }
-      100% { transform: translateX(0) translateY(0); }
-    }
+@keyframes moveLines2 {
+  0% { transform: translateX(0) translateY(-50%); }
+  100% { transform: translateX(0) translateY(0); }
+}
 
-    header * {
-      position: relative;
-      z-index: 1;
-    }
+header * {
+  position: relative;
+  z-index: 1;
+}
+
 
     .logo {
       width: 200px;
@@ -289,3 +293,4 @@
 
 </body>
 </html>
+
