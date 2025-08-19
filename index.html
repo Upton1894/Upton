@@ -19,22 +19,21 @@
       color: #333;
     }
 
- header {
-       background-color: var(--blue);
-       color: white;
-       padding: 3rem 1rem 2rem;
-       text-align: center;
-     }
+    header {
+      background-color: var(--blue);
+      color: white;
+      padding: 3rem 1rem 2rem;
+      text-align: center;
+    }
 
-.logo {
-  width: 200px;
-  margin-bottom: 1rem;
-  box-shadow: 0 8px 12px rgba(0,0,0,0.1);
-}
-  .logo:hover {
-    transform: scale(1.05);
-  }
-
+    .logo {
+      width: 200px;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .logo:hover {
+      transform: scale(1.05);
     }
 
     h1 {
@@ -82,6 +81,52 @@
       background-color: #005fa3;
     }
 
+    .project-list li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Slideshow styles */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .slideshow-container img {
+      width: 100%;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .active-slide {
+      display: block;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 0.5rem;
+      margin-top: -20px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.4);
+      transition: background 0.3s;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
@@ -117,6 +162,31 @@
     </section>
 
     <section class="card">
+      <h2>Projects</h2>
+      <p>Here are some of my engineering projects with links to more details:</p>
+      <ul class="project-list">
+        <li><a href="https://example.com/project1" target="_blank">Bridge Load Analysis Project</a></li>
+        <li><a href="https://example.com/project2" target="_blank">Sustainable Stormwater Management Plan</a></li>
+        <li><a href="https://example.com/project3" target="_blank">Civil 3D Roadway Design</a></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Photo Gallery</h2>
+      <p>Click through my photos from projects and experiences:</p>
+
+      <div class="slideshow-container">
+        <img src="photo1.jpg" alt="Bridge Inspection" class="active-slide">
+        <img src="photo2.jpg" alt="Field Surveying">
+        <img src="photo3.jpg" alt="Sustainable Design Model">
+        <img src="photo4.jpg" alt="Civil 3D Project">
+
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Download My Resume</h2>
       <p>Interested in a more detailed overview of my experience, skills, and accomplishments?</p>
       <a class="btn" href="UptonResume.pdf" target="_blank">📄 View My Resume</a>
@@ -142,6 +212,25 @@
   <footer>
     © Elijah Upton | Civil Engineering Student | All Rights Reserved
   </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slideshow-container img');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active-slide');
+        if(i === index) slide.classList.add('active-slide');
+      });
+    }
+
+    function changeSlide(n) {
+      currentSlide += n;
+      if(currentSlide < 0) currentSlide = slides.length - 1;
+      if(currentSlide >= slides.length) currentSlide = 0;
+      showSlide(currentSlide);
+    }
+  </script>
 
 </body>
 </html>
