@@ -20,7 +20,7 @@
     }
 
     /* ==========================
-       Header with animated blueprint lines
+       Header with animated blueprint boxes
     ========================== */
     header {
       background: #2c2c2c;
@@ -31,18 +31,9 @@
       overflow: hidden;
     }
 
-    header h1, header p {
+    header h1, header p, .logo {
       position: relative;
       z-index: 2;
-      margin: 0.2em 0;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-    }
-
-    header p {
-      font-size: 1.1rem;
     }
 
     .logo {
@@ -51,33 +42,53 @@
       margin-bottom: 1rem;
       box-shadow: 0 8px 20px rgba(0,0,0,0.3);
       transition: transform 0.3s;
-      position: relative;
-      z-index: 2;
     }
 
     .logo:hover {
       transform: scale(1.05);
     }
 
-    /* Blueprint lines animation */
-    header::before {
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0.2em 0;
+    }
+
+    header p {
+      margin: 0.2em 0 0;
+      font-size: 1.1rem;
+    }
+
+    /* Blueprint lines */
+    header::before, header::after {
       content: "";
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       width: 200%;
       height: 200%;
+      background-repeat: repeat;
+      z-index: 1;
+    }
+
+    /* Horizontal and vertical lines forming boxes */
+    header::before {
       background-image:
         linear-gradient(0deg, rgba(0,180,255,0.2) 2px, transparent 0),
         linear-gradient(90deg, rgba(0,180,255,0.2) 2px, transparent 0);
       background-size: 40px 40px;
-      z-index: 1;
-      transform-origin: top right;
-      animation: moveLines 28s linear forwards;
+      animation: moveBoxes 30s linear infinite;
+      transform-origin: top left;
     }
 
-    @keyframes moveLines {
-      0% { transform: translate(50%, -50%); }
+    /* Additional diagonal shading (optional) */
+    header::after {
+      background-image: linear-gradient(45deg, rgba(0,180,255,0.05) 2px, transparent 0);
+      background-size: 40px 40px;
+      animation: moveBoxes 30s linear infinite reverse;
+    }
+
+    @keyframes moveBoxes {
+      0% { transform: translate(-50%, -50%); }
       100% { transform: translate(0%, 0%); }
     }
 
@@ -100,10 +111,6 @@
 
     .card h2 {
       margin-top: 0;
-    }
-
-    .card ul {
-      padding-left: 1.2rem;
     }
 
     a {
@@ -189,6 +196,7 @@
     .contact i {
       color: var(--accent);
     }
+
   </style>
 </head>
 <body>
